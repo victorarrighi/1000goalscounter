@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Contagem de Gols - Messi vs Cristiano</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#0f172a,#020617);
+    color:white;
+}
+
+h1{
+    text-align:center;
+    margin-top:30px;
+    font-size:40px;
+    letter-spacing:2px;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    gap:80px;
+    margin-top:40px;
+    padding:20px;
+}
+
+.player{
+    width:350px;
+    background:#111827;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 0 25px rgba(0,0,0,0.7);
+    text-align:center;
+    transition:0.3s;
+}
+
+.player:hover{
+    transform:scale(1.03);
+}
+
+.photo{
+    width:170px;
+    height:170px;
+    border:3px solid #3b82f6;
+    border-radius:12px;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.goals{
+    font-size:45px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.section{
+    margin-top:25px;
+    text-align:left;
+}
+
+.section h3{
+    border-bottom:1px solid #374151;
+    padding-bottom:6px;
+}
+
+.team{
+    display:flex;
+    justify-content:space-between;
+    margin:5px 0;
+    color:#d1d5db;
+}
+
+.last{
+    margin-top:8px;
+    color:#9ca3af;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Gols na Carreira</h1>
+
+<div class="container">
+
+<div class="player" id="messi">
+<img class="photo" src="messi.jpg">
+
+<h2>Lionel Messi</h2>
+
+<div class="goals" id="messiGoals"></div>
+
+<div class="section">
+<h3>Gols por time</h3>
+<div id="messiTeams"></div>
+</div>
+
+<div class="section">
+<h3>Últimos gols</h3>
+<div id="messiLast"></div>
+</div>
+
+</div>
+
+
+<div class="player" id="ronaldo">
+
+<img class="photo" src="ronaldo.jpg">
+
+<h2>Cristiano Ronaldo</h2>
+
+<div class="goals" id="ronaldoGoals"></div>
+
+<div class="section">
+<h3>Gols por time</h3>
+<div id="ronaldoTeams"></div>
+</div>
+
+<div class="section">
+<h3>Últimos gols</h3>
+<div id="ronaldoLast"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =============================
+// DADOS EDITÁVEIS
+// =============================
+
+const messi = {
+
+total: 909,
+
+teams: [
+{name:"Barcelona B", gols:6},
+{name:"Barcelona", gols:672},
+{name:"PSG", gols:32},
+{name:"Inter Miami", gols:83},
+{name:"Argentina", gols:116}
+],
+
+lastGoals:[
+"2 vs Colorado Rapids - 18/04/2026",
+"1 vs Austin - 04/04/2026"
+]
+
+}
+
+
+const ronaldo = {
+
+total:969,
+
+teams:[
+{name:"Sporting", gols:5},
+{name:"Manchester United", gols:145},
+{name:"Real Madrid", gols:450},
+{name:"Juventus", gols:101},
+{name:"Al Nassr", gols:125},
+{name:"Portugal", gols:143}
+],
+
+lastGoals:[
+"1 vs Al-Wasl - 19/04/2026",
+"1 vs Al-Okhdood - 11/04/2026"
+]
+
+}
+
+
+// =============================
+// FUNÇÃO PARA MOSTRAR DADOS
+// =============================
+
+function renderPlayer(player, goalId, teamId, lastId){
+
+document.getElementById(goalId).innerText = player.total + " gols"
+
+const teamsContainer = document.getElementById(teamId)
+
+player.teams.forEach(team =>{
+
+const div = document.createElement("div")
+div.className = "team"
+
+div.innerHTML = `
+<span>${team.name}</span>
+<span>${team.gols}</span>
+`
+
+teamsContainer.appendChild(div)
+
+})
+
+
+const lastContainer = document.getElementById(lastId)
+
+player.lastGoals.forEach(game =>{
+
+const div = document.createElement("div")
+div.className="last"
+div.innerText = game
+
+lastContainer.appendChild(div)
+
+})
+
+}
+
+
+renderPlayer(messi,"messiGoals","messiTeams","messiLast")
+renderPlayer(ronaldo,"ronaldoGoals","ronaldoTeams","ronaldoLast")
+
+</script>
+
+</body>
+</html>
